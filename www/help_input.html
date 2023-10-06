@@ -1,0 +1,48 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+<p><h3>WIBApp's Input</h3></p>
+
+<p>The main purpose of WIBApp is identify solutions of interest for a given multicriteria decision problem. As input, a Microsoft Excel or Libre/Open Office spreadsheet composed of three sheets is required. See the guidelines below.</p>
+
+<h4>Criteria</h4>
+<p>The first sheet, called "<em>criteria</em>" should include the following for each criterion:</p>
+<ul>
+<li>Short name</li>
+<li>Long name</li>
+<li>Goal (min or max)</li>
+<li>Domain (minimum and maximum possible values)</li>
+<li>Preference order (an integer in the range \(\{1,...,m\}\), where \(m\) is the number of criteria). A value close to 1 indicates that the criterion is very important, a value close to m the opposite.</li>
+</ul>
+
+<p>The following figure shows an example of how the criteria data should be entered in the spreadsheet.</p>
+
+<img src="criteria.png" alt="Criteria settings" width="500px"/>
+
+<h4>Solutions</h4>
+<p>Similarly, the <i>solutions</i> sheet should include the following for each solution:</p>
+<ul>
+<li>Short name</li>
+<li>Long name</li>
+</ul>
+
+<p>The following figure shows how the solutions data should be entered in the spreadsheet.</p>
+
+<img src="solutions.png" alt="Solutions' settings" width="500px"/>
+
+<h4>Evaluations</h4>
+<p>Finally, the evaluations of each solution in each criterion should be entered as shown in the following figure:</p>
+
+<img src="evaluations.png" alt="Evaluations' settings" width="500px"/>
+
+<p><h3>Further resources</h3></p>
+
+<p>To facilitate data entry it is advisable to download this <a title="Template" href="template.xlsx">template</a> and edit it at your convenience. Please note that data or objects outside the ranges of the entries required by WIBApp may cause the process of reading the input file to result in an error. Another common error is to set long or invalid character names for the abbreviations (Short name) used to identify the criteria and solutions. </p>
+
+<p><h4>Examples</h4></p>
+
+<p>You can also download one of the following files which correspond to specific real-life scenarios. The first one, <a href="datasets/universities.xlsx">universities.xlsx</a> contains information from the site <a href="https://roundranking.com/ranking/subject-rankings.html" target="_blank">RUR (Round University Ranking)</a> in which technical universities around the world can be evaluated on the basis of four criteria. The second file <a href="datasets/tourism.xlsx">tourism.xlsx</a> corresponds to the evaluation of European tourist destinations (countries) in terms of their sustainability (see <a href="https://doi.org/10.3390/su142215396" target="_blank">(Ozkaya & Demirhan, 2022))</a>.
+</p>
+<p>
+After downloading one of these files, just upload it as input to WIBApp in the "Data" option. 
+</p>
+

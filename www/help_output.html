@@ -1,0 +1,36 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+<p><h3>WIBApp's Output</h3></p>
+
+<p>
+WIBApp provides different outputs from the data (criteria, solutions and evaluation matrix) and the order of preference of the criteria. </p>
+
+<p>The main outputs of interest are the following:</p>
+
+<ul>
+  <li> Score ranges for each solution.</li>
+  <li>Reference solution (the one with the highest lower bound of the score interval).</li>
+  <li>For each solution, its degree of likelihood of being better than the reference solution. In particular, this degree of possibility is given according to three different attitudes, namely Neutral, Pessimistic, and Optimistic.</li>
+</ul>
+
+<p>From a graphical point of view, WIBApp provides:</p>
+<ul>
+<li> A comparison plot of solutions according to score intervals.</li>
+<li> A comparison plot between pairs of solutions according to the normalized evaluations obtained in each criterion.</li>
+</ul>
+
+<p>Sensitivity analysis is performed on the criteria preference on a particular indicator (e.g. Neutral Attitude) and the ranking obtained is compared to the original preference (eg. the one appearing in "Settings"). To evaluate the similarity between rankings WIBApp calculates for each perturbation (swap between criteria) the following measures:</p>
+<ul>
+<li> Spearman's correlation coefficient,</li>
+<li> Kendall's correlation coefficient,</li>
+<li> Blest's correlation coefficient <a href="https://doi.org/10.1111/1467-842X.00110" target="_blank">(Blest, 2000)</a>,</li>
+<li> Weighted's correlation coefficient <a href="https://doi.org/10.1111/j.1467-842X.2005.00413.x" target="_blank">(Pinto da Costa & Soares, 2005)</a> and</li>
+<li> WS coefficient of Rankings Similarity <a href="https://doi.org/10.1007/978-3-030-50417-5_47" target="_blank">(Sałabun & Urbaniak, 2020)</a>.</li>
+</ul>
+
+<p>WIBApp also provides a statistical summary of the sensitivity analysis.</p>
+
+<p>For more details on how WIBApp performs the calculations see:</p>
+<ul>
+<li>Torres, M., Pelta, D. A., Lamata, M. T., & Yager, R. R. (2021). An approach to identify solutions of interest from multi and many-objective optimization problems. Neural Computing & Applications, 33(7), 2471–2481. <a href="http://doi.org/10.1007/s00521-020-05140-x">doi:10.1007/s00521-020-05140-x</a></li>
+</ul>

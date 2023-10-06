@@ -3,7 +3,7 @@
 
 ### Home
 
-Welcome to WIBApp!, WIBAPP: a software tool for a **w**eightless, **i**nterval-**b**ased **a**pproach multi-criteria decision making method. This task arises in multiple scenarios such as the (a posteriori) evaluation of optimal or high quality solutions of an optimization problem. It requires a very simple data input and provides as output a comprehensive evaluation of the solutions so that the decision maker can choose the most suitable ones for a particular situation. More details are provided in the Help section (https://modougr.shinyapps.io/WIBApp/).
+WIBApp is a software tool for a **w**eightless, **i**nterval-**b**ased **a**pproach multi-criteria decision making method. This task arises in multiple scenarios such as the (a posteriori) evaluation of optimal or high quality solutions of an optimization problem. It requires a very simple data input and provides as output a comprehensive evaluation of the solutions so that the decision maker can choose the most suitable ones for a particular situation. More details are provided in the Help section (https://modougr.shinyapps.io/WIBApp/).
 
 #### Support
 

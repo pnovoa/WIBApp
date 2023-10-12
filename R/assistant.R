@@ -24,12 +24,11 @@ lst_element_to_be_ordered_by <- c("Lower bound score",
 
 lst_ranking_criteria <- c("LB", 
                                   "UB", 
-                                  "EW", 
                                   "neutral", 
                                   "optimistic", 
                                   "pessimistic")
 
-names(lst_ranking_criteria) <- lst_element_to_be_ordered_by[-7]
+names(lst_ranking_criteria) <- lst_element_to_be_ordered_by[-c(3,7)]
 
 
 lst_data_to_export <- c("Input data (current version)", 

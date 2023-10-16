@@ -20,7 +20,7 @@ lst_element_to_be_ordered_by <- c("Lower bound score",
                                   "Neutral attitude", 
                                   "Optimistic attitude", 
                                   "Pessimistic attitude", 
-                                  "Solution")
+                                  "Alternative")
 
 lst_ranking_criteria <- c("LB", 
                                   "UB", 
@@ -76,13 +76,13 @@ get_normalized_evaluations <- function(criteria, evaluations){
   dfr_criteria <- get_data_frame_criteria(criteria)
   
   dfr_evaluations <- evaluations %>% 
-    gather(key = "Criterion", value = "Evaluation", -Solution) %>% 
+    gather(key = "Criterion", value = "Evaluation", -Alternative) %>% 
     inner_join(dfr_criteria, by="Criterion") %>% 
     mutate(Norm.Eval = ifelse(
       Goal == "min",
       1-(Evaluation - LB)/(UB - LB),
       (Evaluation - LB)/(UB - LB))) %>% 
-    select(Solution, Criterion, Norm.Eval) %>% 
+    select(Alternative, Criterion, Norm.Eval) %>% 
     spread(key="Criterion", value="Norm.Eval")
   
   return(dfr_evaluations)
@@ -96,7 +96,7 @@ get_evaluation_matrix <- function(criteria, evaluations){
   dfr_evaluations <- get_normalized_evaluations(criteria, evaluations)
   
   m_evaluations <- as.matrix(dfr_evaluations[,-1][, sorted_criteria])
-  rownames(m_evaluations) <- dfr_evaluations$Solution
+  rownames(m_evaluations) <- dfr_evaluations$Alternative
   colnames(m_evaluations) <- sorted_criteria
   
   return(m_evaluations)
@@ -120,7 +120,7 @@ compute_results <- function(criteria, evaluations, solutions){
   
   colnames(m_results)[coleqw] <- "Equal weights score"
     
-  dfr_computed_results <- as_tibble(m_results, rownames = "Solution")
+  dfr_computed_results <- as_tibble(m_results, rownames = "Alternative")
   
   dfr_computed_results <- dfr_computed_results %>% 
     rename(
@@ -128,11 +128,11 @@ compute_results <- function(criteria, evaluations, solutions){
     "Pessimistic attitude" = pessimistic,
     "Optimistic attitude" = optimistic,
     "Lower bound score" = LB,
-    "Upper bound score" = UB,
+    "Upper bound score" = UB
   )
   
   dfr_computed_results <- dfr_computed_results %>%
-    inner_join(solutions, by=c("Solution"="Short name"))
+    inner_join(solutions, by=c("Alternative"="Short name"))
   
   return(dfr_computed_results)
   
@@ -154,8 +154,8 @@ ggplot_intervals <- function(app_input, dfresults){
   
   if(show_long_names){
     results <- results %>%
-      select(-Solution) %>%
-      rename("Solution"=`Long name`)
+      select(-Alternative) %>%
+      rename("Alternative"=`Long name`)
   } 
   
   #rs_goal <- app_input$sel_rs_goal
@@ -170,19 +170,19 @@ ggplot_intervals <- function(app_input, dfresults){
     dfr_alt <- results %>% 
       arrange(!!sym(ordered_element))
   }
-  dfr_alt <- dfr_alt %>% select(Solution)
+  dfr_alt <- dfr_alt %>% select(Alternative)
   
   dfr_results <- results %>% 
-    mutate(Type = ifelse(REF == 1, "Reference solution", "Others"),
-           Solution = factor(Solution, levels = dfr_alt$Solution))
+    mutate(Type = ifelse(REF == 1, "Reference alternative", "Others"),
+           Alternative = factor(Alternative, levels = dfr_alt$Alternative))
   
-  xlab_text <- "Solution"
-  if(nrow(dfr_results) > 100){
-    xlab_text <- "Solution (only the first 100 are shown)"
+  xlab_text <- "Alternative"
+  if(nrow(dfr_results) > 50){
+    xlab_text <- "Alternative (only the first 50 are shown)"
   }
   
-  p <- dfr_results %>% slice_head(n = min(nrow(dfr_results), 100)) %>%
-    ggplot(aes(x=Solution, y=`Equal weights score`, ymin=`Lower bound score`, ymax=`Upper bound score`, color=Type)) +
+  p <- dfr_results %>% slice_head(n = min(nrow(dfr_results), 50)) %>%
+    ggplot(aes(x=Alternative, y=`Equal weights score`, ymin=`Lower bound score`, ymax=`Upper bound score`, color=Type)) +
     geom_pointrange() + 
     geom_point(shape=21, fill="white") +
     scale_color_discrete(type = plots_colors[c(1,3)]) +
@@ -229,11 +229,11 @@ ggplot_comparison <- function(app_input, dfr_evaluations, dfr_criteria, dfr_solu
     
     
     dfr_data <- dfr_evaluations %>% 
-      filter(Solution %in% c(sol1, sol2)) %>%
-      select(Solution, all_of(sorted_criteria)) %>%
-      pivot_longer(cols = -Solution, names_to = "Criteria", values_to = "Evaluation") %>%
+      filter(Alternative %in% c(sol1, sol2)) %>%
+      select(Alternative, all_of(sorted_criteria)) %>%
+      pivot_longer(cols = -Alternative, names_to = "Criteria", values_to = "Evaluation") %>%
       mutate(Criteria = factor(Criteria, levels=sorted_criteria),
-             Solution = factor(Solution, levels=c(sol1, sol2)))
+             Alternative = factor(Alternative, levels=c(sol1, sol2)))
     
     show_criteria_long_names <- app_input$cbx_show_criteria_long_names_comp
     if(show_criteria_long_names){
@@ -247,22 +247,22 @@ ggplot_comparison <- function(app_input, dfr_evaluations, dfr_criteria, dfr_solu
     show_solutions_long_names <- app_input$cbx_show_solutions_long_names_comp
     if(show_solutions_long_names){
       dfr_data_ <- dfr_data %>% 
-        inner_join(dfr_solutions, by=c("Solution"="Short name")) %>%
-        mutate(Solution = factor(Solution, levels=c(sol1, sol2)))
+        inner_join(dfr_solutions, by=c("Alternative"="Short name")) %>%
+        mutate(Alternative = factor(Alternative, levels=c(sol1, sol2)))
         
       
-      sol_names <- dfr_data_ %>% select(Solution, `Long name`) %>% unique() %>%
-        arrange(Solution) %>% select(`Long name`)
+      sol_names <- dfr_data_ %>% select(Alternative, `Long name`) %>% unique() %>%
+        arrange(Alternative) %>% select(`Long name`)
       
       dfr_data <- dfr_data_ %>%
-        mutate(Solution = `Long name`) %>%
+        mutate(Alternative = `Long name`) %>%
         select(-`Long name`) %>%
-        mutate(Solution = factor(Solution, levels=sol_names$`Long name`))
+        mutate(Alternative = factor(Alternative, levels=sol_names$`Long name`))
     }
     
     
     p <- dfr_data %>% 
-      ggplot(aes(x=Criteria, y=Evaluation, fill=Solution)) +
+      ggplot(aes(x=Criteria, y=Evaluation, fill=Alternative)) +
       geom_bar(stat = "identity", position = "dodge", width = 0.7) + 
       scale_fill_discrete(type = plots_colors) + 
       theme_classic() + 

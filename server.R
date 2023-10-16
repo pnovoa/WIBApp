@@ -97,7 +97,7 @@ function(input, output, session) {
     
     app_data$dfr_criteria <- read_func(path = file_path, sheet = "criteria", .name_repair=name_repair)
     app_data$dfr_criteria <- app_data$dfr_criteria %>% mutate(Goal = factor(Goal, levels = c("min", "max")))
-    app_data$dfr_solutions <- read_func(path = file_path, sheet = "solutions", .name_repair=name_repair)
+    app_data$dfr_solutions <- read_func(path = file_path, sheet = "alternatives", .name_repair=name_repair)
     app_data$dfr_evaluations <- read_func(path = file_path, sheet = "evaluations")
     app_data$n_solutions <- nrow(app_data$dfr_solutions)
     
@@ -138,7 +138,7 @@ function(input, output, session) {
   output$vbx_solutions <- renderValueBox({
     n_ <- nrow(app_data$dfr_solutions)
     valueBox(n_, 
-             "Solutions", icon = icon("rectangle-list"), color = "yellow")
+             "Alternatives", icon = icon("rectangle-list"), color = "yellow")
   })
   
   output$vbx_evaluations <- renderValueBox({
@@ -253,7 +253,7 @@ function(input, output, session) {
         colnames()
       
       lst_criteria <- app_data$dfr_results %>% 
-        select(-all_of(c(col_to_exclude, "Solution", "Long name"))) %>% 
+        select(-all_of(c(col_to_exclude, "Alternative", "Long name"))) %>% 
         colnames()
       
       eval_range <- range(app_data$dfr_results[lst_criteria])
@@ -264,17 +264,17 @@ function(input, output, session) {
       
       if(input$cbx_show_long_names_dt){
         dt_to_show <- dt_to_show %>% 
-          select(-Solution) %>%
-          rename("Solution" = `Long name`)
+          select(-Alternative) %>%
+          rename("Alternative" = `Long name`)
         
         dt_to_show <- dt_to_show %>% 
-          select(all_of(c("Solution", lst_criteria)))
+          select(all_of(c("Alternative", lst_criteria)))
         
       }else{
         dt_to_show <- dt_to_show %>% select(-`Long name`)
       }
       
-      max_lb <- dt_to_show[app_data$dfr_results$REF==1, "Solution"]
+      max_lb <- dt_to_show[app_data$dfr_results$REF==1, "Alternative"]
       
       datatable(dt_to_show, 
                 extensions = 'Buttons', options = list(
@@ -366,7 +366,7 @@ function(input, output, session) {
   
   
   get_solutions_to_plot <- function(){
-    solutions <- app_data$dfr_results$Solution
+    solutions <- app_data$dfr_results$Alternative
     names(solutions) <- app_data$dfr_results$`Long name`
     return(solutions)
   }
@@ -383,7 +383,7 @@ function(input, output, session) {
     solutions <- get_solutions_to_plot()
     
     selectInput(inputId = "sel_solution1", 
-                label = "Solution 1:", 
+                label = "Alternative 1:", 
                 choices = solutions)
   })
   
@@ -397,7 +397,7 @@ function(input, output, session) {
     solutions <- get_solutions_to_plot()
     
     selectInput(inputId = "sel_solution2", 
-                label = "Solution 2:", 
+                label = "Alternative 2:", 
                 choices = solutions,
                 selected = ifelse(length(solutions)>1, solutions[2], solutions[1])
     )

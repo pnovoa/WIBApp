@@ -74,7 +74,7 @@ dashboardPage(
           DT::DTOutput(outputId = "dtb_criteria")
         ),
         box(
-          title = "Solutions",
+          title = "Alternatives",
           width = NULL,
           collapsible = T,
           DT::DTOutput(outputId = "dtb_solutions")
@@ -107,7 +107,7 @@ dashboardPage(
                 includeHTML("www/results.html")
               ),
               box(
-                title = "Solutions",
+                title = "Alternatives",
                 width = NULL,
                 sidebarLayout(
                   position = "left",
@@ -115,11 +115,11 @@ dashboardPage(
                   sidebarPanel = sidebarPanel(
                     width = 3,
                     #h4("Selection of solutions of interest (SOI)"),
-                    p("To filter the solutions of interest, choose an attitude and a number in the slider."),
+                    p("To filter the alternatives of interest, choose an attitude and a number in the slider."),
                     br(),
                     selectInput(inputId = "sel_attitudes", label = "Attitude", choices = lst_attitudes),
                     uiOutput("sld_number_sois"),
-                    checkboxInput(inputId = "cbx_show_long_names_dt", label = "Show long name of solutions", value = F)
+                    checkboxInput(inputId = "cbx_show_long_names_dt", label = "Show long name of alternatives", value = F)
                     #actionButton("btn_filter_results", "Filter", icon = icon("filter"))
                   ),
                   mainPanel = mainPanel(
@@ -138,10 +138,10 @@ dashboardPage(
               box(title = "Intervals",
                   width = NULL, collapsible = TRUE,
                   p('This plot shows through segments the range 
-                    of scores for each solution, as well as the score 
+                    of scores for each alternative, as well as the score 
                     corresponding to the case in which all criteria are 
                     equally important. The latter information is indicated 
-                    by a dot for each solution.'),
+                    by a dot for each alternative.'),
                   sidebarLayout(
                     sidebarPanel = sidebarPanel(
                       selectInput(inputId = "sel_element_to_be_ordered_by", label = "Order by", choices = lst_element_to_be_ordered_by),
@@ -150,7 +150,7 @@ dashboardPage(
                       checkboxInput(inputId = "cbx_rotate_x", label = "Rotate x-axis labels", value = F),
                       checkboxInput(inputId = "cbx_rotate_y", label = "Rotate y-axis labels", value = F),
                       checkboxInput(inputId = "cbx_show_legend", label = "Show legend", value = T),
-                      checkboxInput(inputId = "cbx_show_solutions_long_names_int", label = "Show the long names of solutions", value = F)
+                      checkboxInput(inputId = "cbx_show_solutions_long_names_int", label = "Show the long names of alternatives", value = F)
                     ),
                     
                     mainPanel = mainPanel(
@@ -161,22 +161,22 @@ dashboardPage(
                     
                   )
               ),
-              box(title = "Solution comparison",
+              box(title = "Alternative comparison",
                   width = NULL, collapsible = TRUE,
                   p('This plot allows pairwise comparison of problem 
-                    solutions for each evaluation criterion. The value of 
+                    alternatives for each evaluation criterion. The value of 
                     the original evaluations has been normalized in the 
                     range [0,1] so that a value close to 1 means that 
                     the evaluation is "very good", while a value close 
                     to 0 means the opposite.'),
                   sidebarLayout(
                     sidebarPanel = sidebarPanel(
-                      p("Select two solutions to compare:"),
+                      p("Select two alternatives to compare:"),
                       br(),
                       uiOutput("sel_solution1"),
                       uiOutput("sel_solution2"),
                       p("Plot settings"),
-                      checkboxInput(inputId = "cbx_show_solutions_long_names_comp", label = "Show the long names of solutions", value = F),
+                      checkboxInput(inputId = "cbx_show_solutions_long_names_comp", label = "Show the long names of alternatives", value = F),
                       checkboxInput(inputId = "cbx_show_criteria_long_names_comp", label = "Show the long names of criteria", value = F),
                       checkboxInput(inputId = "cbx_flip_coords_comp", label = "Flip the coordinates", value = F)
                     ),

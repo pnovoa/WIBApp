@@ -19,5 +19,5 @@ Please, if you have any questions, just let us know by writing to us at:
 
 
 Grupo de investigación sobre Modelos de Decisión y Optimización
-Departamente de Ciencias de la Computación e Inteligencia Artificial
+Departamento de Ciencias de la Computación e Inteligencia Artificial
 Universidad de Granada, Spain.

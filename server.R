@@ -353,7 +353,7 @@ function(input, output, session) {
       pgg <- ggplot_intervals(input, app_data$dfr_results)
       
       p <- ggplotly(
-        pgg
+        pgg, tooltip = "text"
       ) 
       
       showleg <- input$cbx_show_legend

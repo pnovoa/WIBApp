@@ -181,12 +181,26 @@ ggplot_intervals <- function(app_input, dfresults){
     xlab_text <- "Alternative (only the first 50 are shown)"
   }
   
+  ncrit <- sum(str_starts(colnames(dfr_results), "W_LB"))
+  ews <- paste0(rep(round(1/ncrit, 2), ncrit), collapse = ", ")
+  
+  dfr_results <- dfr_results %>%
+    mutate(across(starts_with("W_LB"), ~sprintf("%.2f", .))) %>%
+    unite("LBW", starts_with("W_LB"), sep = ", ") %>%
+    mutate(across(starts_with("W_UB"), ~sprintf("%.2f", .))) %>%
+    unite("UBW", starts_with("W_UB"), sep = ", ")
+  
+  
+  
+  
   p <- dfr_results %>% slice_head(n = min(nrow(dfr_results), 50)) %>%
     ggplot(aes(x=Alternative, y=`Equal weights score`, ymin=`Lower bound score`, ymax=`Upper bound score`, color=Type)) +
     geom_pointrange() + 
-    geom_point(shape=21, fill="white") +
+    geom_point(aes(text=paste0("Equal weights score: ", round(`Equal weights score`, 2), "\nFrom weights: (", ews, ")")), shape=21, size=3, fill="white") +
+    geom_point(aes(y=`Lower bound score`, text=paste0("Lower bound score: ", round(`Lower bound score`, 3), "\nFrom weights: (", LBW, ")")), shape=3, size=2) +
+    geom_point(aes(y=`Upper bound score`, text=paste0("Upper bound score: ", round(`Upper bound score`, 3), "\nFrom weights: (", UBW, ")")), shape=3, size=2) +
     scale_color_discrete(type = plots_colors[c(1,3)]) +
-    geom_hline(yintercept = ref_sol_lb_score, linetype="dotted") +
+    geom_hline(yintercept = ref_sol_lb_score, linetype="dotted", linewidth=0.5) +
     ylab("Score") +
     xlab(xlab_text) +
     theme_classic() + 

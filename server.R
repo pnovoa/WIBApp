@@ -534,7 +534,7 @@ function(input, output, session) {
     }
     
     selectInput(inputId = "sel_ranking_criteria", 
-                  label = "Ranking criteria", 
+                  label = "Ranking indicator", 
                   choices = lst_ranking_criteria
                   )
     }

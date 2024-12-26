@@ -194,7 +194,7 @@ dashboardPage(
         box(
           includeHTML("www/sensitivity.html"),width = NULL,status = "info"
         ),
-        box(title = "Criteria preference",
+        box(title = "Local sensitivity analysis",
             width = NULL, collapsible = TRUE,
             p('This functionality allows you to perform sensitivity 
               analyses in relation to the preference of criteria. 

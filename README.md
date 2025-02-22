@@ -13,7 +13,7 @@ This tool has been developed within the COMAS Project: **CO**ntext **M**odelling
 
 Please, if you have any questions, just let us know by writing to us at:
 
-- Pavel Novoa-Hernández, [pavelnovoa@ugr.es](mailto:pnovoahe@ull.edu.es)  
+- Pavel Novoa-Hernández, [pnovoahe@ull.edu.es](mailto:pnovoahe@ull.edu.es)  
 
 - David A. Pelta, [dpelta@ugr.es](mailto:dpelta@ugr.es)
 

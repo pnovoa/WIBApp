@@ -17,7 +17,7 @@ source("R/assistant.R")
 
 
 dashboardPage(
-  dashboardHeader(title = "WIBApp 0.1.0"),
+  dashboardHeader(title = "WIBApp 1.0.1"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Home", tabName = "tbi_home", icon = icon("house")),

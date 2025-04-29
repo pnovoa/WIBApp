@@ -1,7 +1,6 @@
 require(tidyverse)
 library(iosoi)
 
-
 plots_colors <- c("#0373B7", "#F39C13", "#DD4B39", "#08944F")
 
 lst_of_ref_sol_crit <- c("Lower bound score", 
